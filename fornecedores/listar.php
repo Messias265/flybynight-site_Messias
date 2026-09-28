@@ -1,3 +1,14 @@
+<?php
+// Importando o arquivo de funções crud para Fornecedor
+require_once "../src/fornecedor_crud.php";
+
+// Chamando a função (e passando os dados da conexão), e recebendo/guardando o array com os dados dos fornecedores
+$fornecedores = buscarFornecedores($conexao);
+
+var_dump($fornecedores);
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
