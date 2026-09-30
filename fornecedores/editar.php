@@ -12,6 +12,19 @@ $id = $_GET['id'];
 // 2) Ao término, a função DEVOLVE (retorna) um array com os dados do Fornecedor
 $fornecedor = buscarFornecedorPorId($conexao, $id);
 
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $nome = $_POST['nome'];
+
+    // Chamamos a função de UPDATE (passando os dados para ela)
+    atualizarFornecedor($conexao, $id, $nome);
+
+    // Redirecionamos para a página que mostra todos os fornecedores
+    header("location:listar.php");
+
+    // Encerramos/interropemos qualquer outro processo
+    // SEMPRE use exit após o redirecionamento com header()
+    exit;
+}
 //var_dump($fornecedor);
 ?>
 <!DOCTYPE html>
