@@ -39,7 +39,23 @@ function buscarFornecedores(PDO $conexao): array {
 
     // Passo 4: executar a consulta/comando no banco
     $consulta->execute();
+  };
 
-    
 
-  }
+// Usada em fornecedores/editar.php
+
+function buscarFornecedorPorId (PDO $conexao, int $id)
+{
+  // Comando SQL 
+  $sql = "SELECT * FROM fornecedores WHERE id = :id";
+  // Preparação da consulta 
+  $consulta = $conexao->prepare($sql);
+  // Atribuição do valor recebido (em $id) ao parâmetro nomeado (:id)
+  $consulta->bindValue(":id", $id);
+  // Exercução da consulta 
+  $consulta->execute();
+
+  // Retorno dos dados como array associativo
+  // ATENÇÃO: aqui usamos fetch() por se tratar de UM ÚNICO array (vetor)
+  return $consulta-> fetch();
+}
