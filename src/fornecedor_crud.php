@@ -17,10 +17,6 @@ function buscarFornecedores(PDO $conexao): array {
     // Retornando o resultado como um array associativo
     return $consulta->fetchAll();
   };
-
-  
-  
-  
   
   // Usada em fornecedores/inserir.php
   function inserirFornecedor(PDO $conexao, string $nome):void {
@@ -44,7 +40,7 @@ function buscarFornecedores(PDO $conexao): array {
 
 // Usada em fornecedores/editar.php
 
-function buscarFornecedorPorId (PDO $conexao, int $id)
+function buscarFornecedorPorId (PDO $conexao, int $id): array
 {
   // Comando SQL 
   $sql = "SELECT * FROM fornecedores WHERE id = :id";
@@ -59,3 +55,5 @@ function buscarFornecedorPorId (PDO $conexao, int $id)
   // ATENÇÃO: aqui usamos fetch() por se tratar de UM ÚNICO array (vetor)
   return $consulta-> fetch();
 }
+
+// Usada em fornecedores/editar.php
