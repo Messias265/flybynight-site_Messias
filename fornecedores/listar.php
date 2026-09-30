@@ -1,4 +1,6 @@
 <?php
+// fornecedores/listar.php
+
 // Importando o arquivo de funções crud para Fornecedor
 require_once "../src/fornecedor_crud.php";
 
