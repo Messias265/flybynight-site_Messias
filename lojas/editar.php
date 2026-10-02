@@ -1,3 +1,28 @@
+<?php
+// lojas/loja.php
+
+//importando
+require_once "../src/loja_crud.php";
+
+$id = $_GET['id'];
+
+$loja = buscarLojaPorId($conexao, $id);
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $nome = $_POST['nome'];
+
+    // Chamaos a função
+    atualizarLoja($conexao, $id, $nome);
+
+    /// Redirecionar
+    header("location:listar.php");
+
+    // saida
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -19,9 +44,13 @@
         <!-- Modelo visual: os campos não são enviados nem persistidos. -->
         <!-- Os campos serão preenchidos com os dados do registro selecionado. -->
         <form action="" method="post">
+            <!-- usar campo oculto -->
+             <input type="hidden" name="id" value="<?= $loja['id'] ?>">
             <div>
                 <label for="nome">Nome:</label>
-                <input type="text" name="nome" id="nome" maxlength="100" required>
+                <!-- aplicando php -->
+
+                <input value="<?= $loja['nome'] ?>" type="text" name="nome" id="nome" maxlength="100" required>
             </div>
             <button type="submit">Atualizar</button>
         </form>
