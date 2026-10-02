@@ -1,4 +1,4 @@
-<?php
+<?php 
 // Lojas/listar.php
 
 // Importando
