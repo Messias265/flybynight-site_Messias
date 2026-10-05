@@ -12,8 +12,8 @@ function buscarProdutos(PDO $conexao):array
 
             FROM produtos JOIN fornecedores
             ON fornecedores.id = produtos.fornecedor_id
-            ORDER BY nome_produto"
-            ;
+            ORDER BY nome_produto";
     $consulta = $conexao->query($sql);
     return $consulta->fetchAll();
-}
+};
+
