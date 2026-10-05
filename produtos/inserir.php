@@ -6,6 +6,34 @@ require_once "../src/produto_crud.php";
 // Buscando a lista de fornecedores ja existentes
 // Isso é necessário para o campo de seleção de fornecedores no formulário
 $fornecedores = buscarFornecedores($conexao);
+
+$produtos = buscarProdutos($conexao);
+
+if($_SERVER['REQUEST_METHOD'] === "POST"){
+     $nome = $_POST['nome'];
+     $descricao = $_POST['descricao'];
+     $preco = $_POST['preco'];
+     $quantidade = $_POST['quantidade'];
+     $fornecedor_id = $_POST['fornecedor'];
+
+     inserirProduto($conexao, $nome, $descricao, $preco, $quantidade, $fornecedor_id);
+
+     header("location:listar.php");
+
+     exit;
+    
+
+};
+/* Exercícios: */
+// 1)Detectar o acionamento do formulário de inserção
+
+// 2) Capturar os dados do formulário
+
+// 3) Chamar a função de inserir e passar os dados para ela
+
+// 4) Redirecionar para a página que mostra os produtos
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
