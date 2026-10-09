@@ -9,9 +9,10 @@ function buscarLojasProdutos(PDO $conexao):array
                  produtos.nome AS nome_produto,
                  loja.nome AS nome_loja
             FROM lojas_produtos 
-            JOIN produtos ON produtos.id = lojas_produtos.produto_id 
-            JOIN lojas ON lojas.id = lojas_produtos.loja_id
-            ORDER BY nome_loja";
+             JOIN produto ON produtos.id = lojas_produtos_id 
+             JOIN loja ON lojas.id = lojas_produtosid
+            ORDER BY nome_loja, nome_produto, estoque";
+
     $consulta = $conexao->query($sql);
     return $consulta->fetchAll();
 };
