@@ -5,7 +5,7 @@ require_once "conecta.php";
 
 function buscarLojasProdutos(PDO $conexao):array 
 {
-    $sql = "SELECT * FROM lojas_produtos ORDER BY produtos, lojas";
+    $sql = "SELECT * FROM lojas_produtos ORDER BY produto_id, loja_id, estoque";
 
     $consulta = $conexao->query($sql);
 
