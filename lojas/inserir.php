@@ -9,20 +9,19 @@ $fornecedores = buscarFornecedores($conexao);
 
 /* Exercícios: */
 
-// 1) Detectar o acionamento do formulário de inserção
+
 if($_SERVER["REQUEST_METHOD"] === "POST"){
-    // 2) Capturar os dados de cada campo do formulário
-    // Obs.: atenção a qual é o name de cada campo
+   
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
     $quantidade = $_POST['quantidade'];
     $fornecedor = $_POST['fornecedor'];
 
-    // 3) Chamar a função de inserir e passar os dados para ela
+    
     inserirProduto($conexao, $nome, $descricao, $preco, $quantidade, $fornecedor);
 
-    // 4) Redirecionar para a página que mostra os produtos
+    
     header("location:listar.php");
     exit;
 }
@@ -73,7 +72,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                     <option value=""></option>
                     
                     <?php foreach($fornecedores as $fornecedor): ?>
-                        <option value="<?= $fornecedor['id'] ?>"> 
+                        <option 
+                       
+                        value="<?= $fornecedor['id'] ?>"> 
                             <?= $fornecedor['nome'] ?> 
                         </option>
                     <?php endforeach ?>

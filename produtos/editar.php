@@ -18,18 +18,29 @@ $fornecedores = buscarFornecedores($conexao);
 // 4) Chamar a função buscarProdutoPorId e receber os dados do produto (guarde em uma variável chamada $produto)
 $produto = buscarProdutoPorId($conexao, $id);
 
-
 // PARTE 2
 
 // 1) Detectar o acionamento do formulário de atualização
 
-// 2) Capturar os dados do formulário
+if($_SERVER["REQUEST_METHOD"] === "POST"){
+   // 2) Capturar os dados do formulário
+    $nome = $_POST['nome'];
+    $descricao = $_POST['descricao'];
+    $preco = $_POST['preco'];
+    $quantidade = $_POST['quantidade'];
+    $fornecedor = $_POST['fornecedor'];
 
-// 3) Chamar a função atualizarProduto e passar os dados pra ela
+    // 3) Chamar a função atualizarProduto e passar os dados pra ela
+    atualizarProduto($conexao, $id, $nome, $descricao, $preco, $quantidade, $fornecedor);
 
-// 4) Redirecionar para a página listar produtos
+    
+    // 4) Redirecionar para a página listar produtos
+    header("location:listar.php");
 
-// 5) Testar: tente atualizar dados de pelo menos 3 produtos
+    // 5) Testar: tente atualizar dados de pelo menos 3 produtos
+    exit;
+};
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -49,7 +60,7 @@ $produto = buscarProdutoPorId($conexao, $id);
     ?>
     <main>
         <h2>Editar produto</h2>
-        
+
         <!-- PARTE 1 -->
         <!-- 5) Exibir os dados do produto em cada campo do formulário 
         No caso dos campos input, use o atributo value.
@@ -60,7 +71,7 @@ $produto = buscarProdutoPorId($conexao, $id);
             <div>
                 <label for="nome">Nome:</label>
                 <input value="<?= $produto['nome'] ?>"
-                type="text" name="nome" id="nome" maxlength="100" required >
+                    type="text" name="nome" id="nome" maxlength="100" required>
             </div>
             <div>
                 <label for="descricao">Descrição:</label>
@@ -69,34 +80,27 @@ $produto = buscarProdutoPorId($conexao, $id);
             <div>
                 <label for="preco">Preço:</label>
                 <input value="<?= $produto['preco'] ?>"
-                type="number" name="preco" id="preco" min="0" step="0.01" required>
+                    type="number" name="preco" id="preco" min="0" step="0.01" required>
             </div>
             <div>
                 <label for="quantidade">Quantidade:</label>
                 <input value="<?= $produto['quantidade'] ?>"
-                 type="number" name="quantidade" id="quantidade" min="0" step="1" required>
+                    type="number" name="quantidade" id="quantidade" min="0" step="1" required>
             </div>
             <div>
                 <label for="fornecedor">Fornecedor:</label>
                 <select name="fornecedor" id="fornecedor" required>
                     <option value="">Selecione</option>
-                    
-                    <!-- PARTE 1 -->
-                    <!-- 6) DESAFIO 
-                    
-                    6.1) Usando foreach, acesse os $fornecedores
-                    e mostre na tag <option> os nomes de cada fornecedor.
-                    No atributo value, coloque o id de cada fornecedor.
+                    <?php foreach ($fornecedores as $fornecedor): ?>
+                    <!-- A condicional abaixo (feita dentro da tag <option>) faz com que o  fornecedor do produto que está sendo editado já venha selecionado. A lógica geral é:
 
-                    6.2) O fornecedor daquele produto que está sendo exibido,
-                    já DEVE VIR SELECIONADO. Programe os recursos para isso
-                    acontecer.  -->
-                    <?php foreach($fornecedores as $fornecedor): ?>
-                        <!-- Se PK de fornecedor for igual à FK de produto, selecione o fornecedor -->
+                    Se o id do fornecedor (que vem de $fornecedor['id]) for o mesmo do que está registrado no produto (que vem de $produto['fornecedor_id']), então aplique o atributo 'selected'. Caso contrário, não faça nada.
+                            
+                    -->
                         <option
-                        <?= $fornecedor["id"] === $produto["fornecedor_id"] ? 'selected' : '' ?>
-                         value="<?= $fornecedor['id'] ?>"> 
-                            <?= $fornecedor['nome'] ?> 
+                            <?= $fornecedor["id"] === $produto["fornecedor_id"] ? 'selected' : '' ?>
+                            value="<?= $fornecedor['id'] ?>">
+                            <?= $fornecedor['nome'] ?>
                         </option>
                     <?php endforeach ?>
                 </select>
