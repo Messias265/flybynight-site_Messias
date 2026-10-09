@@ -41,8 +41,7 @@ $lojas_produtos = buscarLojasProdutos($conexao);
                 <tbody>
                     <?php foreach($lojas_produtos as $loja_produto): ?>
                         <tr>
-                            <td> <?= $loja_produto["nome"] ?></td>
-                            <td> <?= $loja_produto["estoque"] ?></td>
+                            
                             <td>
                         <!-- Link dinâmico -->
                         <a href="editar.php?id=?>">Editar</a>
