@@ -1,3 +1,11 @@
+<?php
+require_once "../src/loja_produto_crud.php";
+
+$lojas_produtos = buscarLojasProdutos($conexao);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -31,7 +39,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Aqui serão geradas as linhas com os dados e as ações Editar e Excluir de cada registro. -->
+                        <tr>
+                            <td>
+                        <!-- Link dinâmico -->
+                        <a href="editar.php?id=?>">Editar</a>
+                        <a href="excluir.php?id=" class="excluir">Excluir</a>
+                            </td>
+                       </tr>
+                        
+                        
                 </tbody>
             </table>
         </div>
